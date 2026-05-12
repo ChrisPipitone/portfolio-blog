@@ -83,6 +83,25 @@ Code blocks (both modes): light background `#f8f8f6`, border `#ddd8cf`, dark tex
 - YouTube embeds: inline on project or blog pages where relevant
 - `/about` — who Chris is, how he thinks
 
+## Images — All Optional
+
+- Project card thumbnail: optional. Cards render fine without one.
+- Project writeup body: anywhere from zero images to many. No assumed structure.
+- Blog post body: same — zero to many images, no assumed structure.
+- Never assume a project or post has images. Never require them.
+
+### Image locations
+
+**Frontmatter thumbnails** (card images, hero images) → `src/assets/images/{type}/{slug}/filename.ext`
+- Processed by Astro at build time (optimized, lazy-loaded via `<Image>` component)
+- Referenced in frontmatter as: `image: /src/assets/images/projects/my-project/thumbnail.jpg`
+- Supported formats: jpg, jpeg, png, webp, avif, svg
+
+**Inline images in markdown body** → `public/images/{type}/{slug}/filename.ext`
+- Served as-is (no build-time optimization)
+- Referenced in markdown as: `![alt text](/images/projects/my-project/diagram.png)`
+- Optimize these manually before adding (run through Squoosh or similar)
+
 ## Developer Notes
 
 - Adding project = new `.md` file + optional assets, then `git push`
