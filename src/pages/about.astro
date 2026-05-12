@@ -1,0 +1,29 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { site } from "../config/site";
+---
+
+<Base title="About">
+  <SectionHeader label="About" />
+
+  <main class="main">
+    <div class="prose">
+      <!--
+        Write your about page here.
+        This is yours — no AI content.
+        Delete this comment when you're ready.
+      -->
+      <h2>Hi, I'm {site.name}.</h2>
+      <p>Add your own bio here.</p>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .main {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+</style>

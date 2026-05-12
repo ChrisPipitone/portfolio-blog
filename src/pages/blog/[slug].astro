@@ -1,0 +1,120 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+};
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+const { Content } = await render(post);
+
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Base title={title} description={description}>
+  <div class="bp-nav-band">
+    <div class="bp-nav-band__inner">
+      <a href="/blog" class="bp-back">← Writing</a>
+    </div>
+  </div>
+
+  <main class="bp-main">
+    <header class="bp-header">
+      <h1 class="bp-title">{title}</h1>
+
+      <div class="bp-meta">
+        <span class="bp-meta__date">{formattedDate}</span>
+        {tags.map((tag) => (
+          <span class="bp-meta__tag">{tag}</span>
+        ))}
+      </div>
+
+      <hr class="bp-divider" />
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </main>
+</Base>
+
+<style>
+  .bp-nav-band {
+    background-color: var(--color-nav);
+    padding: 0.5rem 0;
+  }
+
+  .bp-nav-band__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .bp-back {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .bp-back:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .bp-main {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .bp-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin-bottom: 0.75rem;
+  }
+
+  .bp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .bp-meta__date {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .bp-meta__tag {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-color: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .bp-divider {
+    border: none;
+    border-top: 1px solid var(--color-divider);
+    margin-bottom: 2rem;
+  }
+</style>

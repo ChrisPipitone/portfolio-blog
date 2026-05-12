@@ -1,0 +1,73 @@
+---
+import { site } from "../config/site";
+
+interface Props {
+  name?: string;
+  tagline?: string;
+  bio?: string;
+}
+
+const {
+  name = site.name,
+  tagline = site.tagline,
+  bio = site.bio,
+} = Astro.props;
+---
+
+<section class="hero grain-bg">
+  <div class="hero__inner">
+    <h1 class="hero__name">{name}</h1>
+    <p class="hero__tagline">{tagline}</p>
+    <p class="hero__bio">{bio}</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background-color: var(--color-bg);
+    border-bottom: 2px solid var(--color-nav);
+    position: relative;
+  }
+
+  /* Mahogany accent line under hero */
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 1.5rem;
+    width: 3rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  .hero__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+
+  .hero__name {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero__tagline {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__bio {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-text-body);
+    max-width: 38rem;
+  }
+</style>

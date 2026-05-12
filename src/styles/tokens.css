@@ -1,0 +1,80 @@
+/*
+  Design tokens — single source of truth for all visual decisions.
+  To change the theme, edit values here. Nothing else needs to change.
+
+  Fonts are loaded in src/layouts/Base.astro — update the Google Fonts
+  URL there if switching font families, then update the var values below.
+*/
+
+:root {
+  /* ── Fonts ── */
+  --font-heading: "Libre Baskerville", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-mono:    "Space Mono", "Courier New", monospace;
+
+  /* ── Light mode (default) ── */
+  --color-bg:           #F5F2ED;
+  --color-bg-card:      #ffffff;
+  --color-bg-code:      #f8f8f6;
+
+  --color-nav:          #1C2B4A;
+  --color-nav-link:     #7a9ab5;
+  --color-section-band: #1C2B4A;
+  --color-band-label:   #7a9ab5;
+
+  --color-text-heading: #1C2B4A;
+  --color-text-body:    #4a4540;
+  --color-text-muted:   #7a7060;
+
+  --color-accent:       #7A2020;   /* mahogany — links, hover, left-border */
+  --color-accent-hover: #5a1515;
+
+  --color-border:       #e0dbd2;
+  --color-border-code:  #ddd8cf;
+  --color-divider:      #ddd8cf;
+
+  --color-tag-bg:       #1C2B4A;
+  --color-tag-text:     #F5F2ED;
+
+  /* ── Grain texture (hero background) ── */
+  --hero-grain-opacity: 0.045;
+
+  /* ── Spacing scale ── */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+
+  /* ── Layout ── */
+  --content-width: 72rem;   /* max-width for content */
+  --prose-width:   42rem;   /* max-width for blog/project prose */
+  --nav-height:    3.25rem;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] {
+  --color-bg:           #1A1A1A;
+  --color-bg-card:      #212121;
+  --color-bg-code:      #181818;
+
+  --color-nav:          #141414;
+  --color-nav-link:     #404040;
+  --color-section-band: #141414;
+  --color-band-label:   #303030;
+
+  --color-text-heading: #E8E0D8;
+  --color-text-body:    #909090;
+  --color-text-muted:   #505050;
+
+  --color-accent:       #7A2020;
+  --color-accent-hover: #9a2828;
+
+  --color-border:       #2a2a2a;
+  --color-border-code:  #2a2a2a;
+  --color-divider:      #2a2a2a;
+
+  --color-tag-bg:       #2a2020;
+  --color-tag-text:     #7a3030;
+}

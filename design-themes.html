@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Theme Explorations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Libre+Baskerville:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: #0e0e0e; color: #ccc; font-family: 'DM Sans', sans-serif; padding: 40px 24px; }
+    h1 { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #555; margin-bottom: 8px; }
+    .page-note { font-size: 12px; color: #444; margin-bottom: 60px; line-height: 1.6; }
+
+    .theme-block { margin-bottom: 80px; }
+    .theme-title {
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #555; border-bottom: 1px solid #1e1e1e; padding-bottom: 8px; margin-bottom: 8px;
+    }
+    .theme-concept { font-size: 12px; color: #444; margin-bottom: 24px; }
+
+    /* Swatches */
+    .swatches { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
+    .swatch-wrap { text-align: center; }
+    .swatch {
+      width: 52px; height: 52px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .swatch-hex { font-size: 8px; color: #444; font-family: monospace; margin-top: 4px; display: block; }
+    .swatch-name { font-size: 8px; color: #333; margin-top: 1px; display: block; }
+
+    /* Previews side by side */
+    .preview-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ─ shared mock chrome ─ */
+    .mock { border-radius: 8px; overflow: hidden; border: 1px solid #1e1e1e; font-size: 0; }
+    .mock-nav { display: flex; justify-content: space-between; align-items: center; padding: 11px 20px; }
+    .mock-logo { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
+    .mock-links { display: flex; gap: 16px; }
+    .mock-link { font-family: 'DM Sans', sans-serif; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .mock-hero { padding: 28px 20px 32px; position: relative; }
+    .mock-hero::after { content:''; position:absolute; bottom:0; left:20px; width:32px; height:2px; }
+    .mock-name { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 700; line-height: 1.15; margin-bottom: 6px; }
+    .mock-sub { font-family: 'DM Sans', sans-serif; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px; }
+    .mock-bio { font-family: 'DM Sans', sans-serif; font-size: 9px; line-height: 1.7; max-width: 260px; }
+    .mock-section-bar { padding: 7px 20px; }
+    .mock-section-label { font-family: 'DM Sans', sans-serif; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; }
+    .mock-content { padding: 14px 20px 20px; }
+    .mock-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mock-card { border-radius: 4px; overflow: hidden; }
+    .mock-card-img { height: 40px; display:flex; align-items:center; justify-content:center; font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing:0.06em; }
+    .mock-card-body { padding: 8px 10px; }
+    .mock-card-title { font-family: 'Libre Baskerville', serif; font-size: 9px; font-weight: 700; margin-bottom: 3px; }
+    .mock-card-desc { font-family: 'DM Sans', sans-serif; font-size: 7px; line-height: 1.5; margin-bottom: 6px; }
+    .mock-card-foot { display:flex; justify-content:space-between; align-items:center; }
+    .mock-card-tag { font-family: 'DM Sans', sans-serif; font-size: 6px; letter-spacing:0.1em; text-transform:uppercase; padding: 1px 5px; border-radius: 2px; }
+    .mock-card-gh { font-family: 'DM Sans', sans-serif; font-size: 7px; }
+    .mock-label { font-size: 10px; color: #555; text-align: center; padding: 8px; letter-spacing:0.08em; text-transform:uppercase; }
+
+    /* grain texture helper */
+    .grain {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    }
+
+
+    /* ══════════════════════════════════════════════
+       THEME 1 — GUNMETAL & MAHOGANY
+       Current but de-blued. Charcoal dark mode.
+       Mahogany red replaces cold #8B1A1A.
+       ══════════════════════════════════════════════ */
+
+    /* light */
+    .t1l-nav  { background:#1C2B4A; }
+    .t1l-logo { color:#F5F2ED; }
+    .t1l-link { color:#7a9ab5; }
+    .t1l-hero { background-color:#F5F2ED; border-bottom: 2px solid #1C2B4A; }
+    .t1l-hero::after { background:#7a2020; }
+    .t1l-name { color:#1C2B4A; }
+    .t1l-sub  { color:#7a2020; }
+    .t1l-bio  { color:#4a4540; }
+    .t1l-bar  { background:#1C2B4A; }
+    .t1l-bar-label { color:#7a9ab5; }
+    .t1l-content { background:#F5F2ED; }
+    .t1l-card { background:#fff; border:1px solid #e0dbd2; border-left:3px solid #7a2020; }
+    .t1l-card-img { background:#1C2B4A; color:#4a6a80; }
+    .t1l-card-title { color:#1C2B4A; }
+    .t1l-card-desc { color:#7a7060; }
+    .t1l-card-tag { background:#1C2B4A; color:#F5F2ED; }
+    .t1l-card-gh { color:#7a2020; }
+
+    /* dark */
+    .t1d-nav  { background:#141414; border-bottom:1px solid #252525; }
+    .t1d-logo { color:#e8e0d8; }
+    .t1d-link { color:#404040; }
+    .t1d-hero { background:#1a1a1a; border-bottom:1px solid #252525; }
+    .t1d-hero::after { background:#7a2020; }
+    .t1d-name { color:#e8e0d8; }
+    .t1d-sub  { color:#7a2020; }
+    .t1d-bio  { color:#606060; }
+    .t1d-bar  { background:#141414; border-top:1px solid #252525; border-bottom:1px solid #252525; }
+    .t1d-bar-label { color:#303030; }
+    .t1d-content { background:#1a1a1a; }
+    .t1d-card { background:#212121; border:1px solid #2a2a2a; border-left:3px solid #7a2020; }
+    .t1d-card-img { background:#181818; color:#303030; }
+    .t1d-card-title { color:#c8c0b8; }
+    .t1d-card-desc { color:#505050; }
+    .t1d-card-tag { background:#2a2020; color:#7a3030; }
+    .t1d-card-gh { color:#7a2020; }
+
+
+    /* ══════════════════════════════════════════════
+       THEME 2 — WALNUT & OLIVE
+       Dark walnut replaces navy. Olive green accent.
+       Mahogany for links/hover. Earthy, leather goods.
+       ══════════════════════════════════════════════ */
+
+    .t2l-nav  { background:#2a1f0e; }
+    .t2l-logo { color:#f0e8d8; }
+    .t2l-link { color:#7a6a50; }
+    .t2l-hero { background-color:#f0ead8; border-bottom:2px solid #2a1f0e; }
+    .t2l-hero::after { background:#556B2F; }
+    .t2l-name { color:#2a1f0e; }
+    .t2l-sub  { color:#556B2F; }
+    .t2l-bio  { color:#5a4a38; }
+    .t2l-bar  { background:#2a1f0e; }
+    .t2l-bar-label { color:#7a6a50; }
+    .t2l-content { background:#f0ead8; }
+    .t2l-card { background:#faf6ec; border:1px solid #ddd0b8; border-left:3px solid #6B2D2D; }
+    .t2l-card-img { background:#2a1f0e; color:#5a4a30; }
+    .t2l-card-title { color:#2a1f0e; }
+    .t2l-card-desc { color:#7a6a50; }
+    .t2l-card-tag { background:#556B2F; color:#f0ead8; }
+    .t2l-card-gh { color:#6B2D2D; }
+
+    .t2d-nav  { background:#130d04; border-bottom:1px solid #201508; }
+    .t2d-logo { color:#e8d8b8; }
+    .t2d-link { color:#3a2a14; }
+    .t2d-hero { background:#1a1008; border-bottom:1px solid #251808; }
+    .t2d-hero::after { background:#556B2F; }
+    .t2d-name { color:#e8d8b8; }
+    .t2d-sub  { color:#4a6B20; }
+    .t2d-bio  { color:#5a4a30; }
+    .t2d-bar  { background:#130d04; border-top:1px solid #201508; border-bottom:1px solid #201508; }
+    .t2d-bar-label { color:#2a1a08; }
+    .t2d-content { background:#1a1008; }
+    .t2d-card { background:#201508; border:1px solid #2a1a08; border-left:3px solid #6B2D2D; }
+    .t2d-card-img { background:#130d04; color:#3a2a14; }
+    .t2d-card-title { color:#c8b898; }
+    .t2d-card-desc { color:#5a4a30; }
+    .t2d-card-tag { background:#1a2808; color:#4a6B20; }
+    .t2d-card-gh { color:#6B2D2D; }
+
+
+    /* ══════════════════════════════════════════════
+       THEME 3 — HUNTER GREEN & MAHOGANY
+       Hunter green replaces navy for structure.
+       Mahogany red accent. Off-white light. Near-black dark.
+       ══════════════════════════════════════════════ */
+
+    .t3l-nav  { background:#1e3a1e; }
+    .t3l-logo { color:#f0ece4; }
+    .t3l-link { color:#6a9060; }
+    .t3l-hero { background-color:#f0ece4; border-bottom:2px solid #1e3a1e; }
+    .t3l-hero::after { background:#7a2020; }
+    .t3l-name { color:#1e3a1e; }
+    .t3l-sub  { color:#7a2020; }
+    .t3l-bio  { color:#4a4840; }
+    .t3l-bar  { background:#1e3a1e; }
+    .t3l-bar-label { color:#6a9060; }
+    .t3l-content { background:#f0ece4; }
+    .t3l-card { background:#fff; border:1px solid #ddd8d0; border-left:3px solid #7a2020; }
+    .t3l-card-img { background:#1e3a1e; color:#4a7040; }
+    .t3l-card-title { color:#1e3a1e; }
+    .t3l-card-desc { color:#6a6860; }
+    .t3l-card-tag { background:#1e3a1e; color:#f0ece4; }
+    .t3l-card-gh { color:#7a2020; }
+
+    .t3d-nav  { background:#0a140a; border-bottom:1px solid #141e14; }
+    .t3d-logo { color:#e0dcd4; }
+    .t3d-link { color:#2a3a2a; }
+    .t3d-hero { background:#101810; border-bottom:1px solid #181e18; }
+    .t3d-hero::after { background:#7a2020; }
+    .t3d-name { color:#e0dcd4; }
+    .t3d-sub  { color:#7a2020; }
+    .t3d-bio  { color:#4a5a48; }
+    .t3d-bar  { background:#0a140a; border-top:1px solid #141e14; border-bottom:1px solid #141e14; }
+    .t3d-bar-label { color:#1e2e1e; }
+    .t3d-content { background:#101810; }
+    .t3d-card { background:#141e14; border:1px solid #1e2a1e; border-left:3px solid #7a2020; }
+    .t3d-card-img { background:#0a140a; color:#2a3a28; }
+    .t3d-card-title { color:#c8c4bc; }
+    .t3d-card-desc { color:#4a5a48; }
+    .t3d-card-tag { background:#182818; color:#4a7a40; }
+    .t3d-card-gh { color:#7a2020; }
+
+
+    /* ══════════════════════════════════════════════
+       THEME 4 — FORGE & GRAIN
+       Most distinctive. Near-black with brass/amber.
+       Sage green for tags. Mahogany for interaction.
+       Light: cream with charcoal structure.
+       ══════════════════════════════════════════════ */
+
+    .t4l-nav  { background:#1a1a18; }
+    .t4l-logo { color:#f0e8d0; }
+    .t4l-link { color:#605a48; }
+    .t4l-hero { background-color:#f5f0e4; border-bottom:2px solid #1a1a18; }
+    .t4l-hero::after { background:#8B6B3A; }
+    .t4l-name { color:#1a1a18; }
+    .t4l-sub  { color:#8B6B3A; }
+    .t4l-bio  { color:#4a4840; }
+    .t4l-bar  { background:#1a1a18; }
+    .t4l-bar-label { color:#504a38; }
+    .t4l-content { background:#f5f0e4; }
+    .t4l-card { background:#fdfaf2; border:1px solid #e0d8c0; border-left:3px solid #6B2D2D; }
+    .t4l-card-img { background:#1a1a18; color:#404038; }
+    .t4l-card-title { color:#1a1a18; }
+    .t4l-card-desc { color:#7a7060; }
+    .t4l-card-tag { background:#3a5a30; color:#b8d4a8; }
+    .t4l-card-gh { color:#6B2D2D; }
+
+    .t4d-nav  { background:#0e0e0c; border-bottom:1px solid #1a1a16; }
+    .t4d-logo { color:#e8dfc8; }
+    .t4d-link { color:#302e28; }
+    .t4d-hero { background:#131310; border-bottom:1px solid #1e1e1a; }
+    .t4d-hero::after { background:#8B6B3A; }
+    .t4d-name { color:#e8dfc8; }
+    .t4d-sub  { color:#8B6B3A; }
+    .t4d-bio  { color:#505048; }
+    .t4d-bar  { background:#0e0e0c; border-top:1px solid #1a1a16; border-bottom:1px solid #1a1a16; }
+    .t4d-bar-label { color:#252520; }
+    .t4d-content { background:#131310; }
+    .t4d-card { background:#1a1a16; border:1px solid #242420; border-left:3px solid #6B2D2D; }
+    .t4d-card-img { background:#0e0e0c; color:#282824; }
+    .t4d-card-title { color:#c8c0a8; }
+    .t4d-card-desc { color:#505048; }
+    .t4d-card-tag { background:#1e2e18; color:#6a9a58; }
+    .t4d-card-gh { color:#6B2D2D; }
+
+    @media (max-width: 680px) { .preview-pair { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<h1>Color Theme Explorations</h1>
+<p class="page-note">Typography locked: Libre Baskerville + DM Sans. Layout locked: navy nav → grain hero → section bands. These explore color only. Compare against design-preview.html (baseline).</p>
+
+
+<!-- ══ THEME 1 ══ -->
+<div class="theme-block">
+  <div class="theme-title">Theme 1 — Gunmetal & Mahogany</div>
+  <p class="theme-concept">Current palette, de-blued. Navy stays for light mode structure. Dark mode shifts to charcoal/gunmetal — no more cold blue everywhere. Mahogany red (#7A2020) replaces the current dark red. Warm gray text.</p>
+
+  <div class="swatches">
+    <div class="swatch-wrap"><div class="swatch" style="background:#1C2B4A"></div><span class="swatch-hex">#1C2B4A</span><span class="swatch-name">Navy</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#7a2020"></div><span class="swatch-hex">#7A2020</span><span class="swatch-name">Mahogany</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#F5F2ED; border:1px solid #333"></div><span class="swatch-hex">#F5F2ED</span><span class="swatch-name">Off-white</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#1a1a1a"></div><span class="swatch-hex">#1A1A1A</span><span class="swatch-name">Gunmetal</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#e8e0d8"></div><span class="swatch-hex">#E8E0D8</span><span class="swatch-name">Warm white</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#606060"></div><span class="swatch-hex">#606060</span><span class="swatch-name">Stone</span></div>
+  </div>
+
+  <div class="preview-pair">
+    <div>
+      <div class="mock">
+        <div class="mock-nav t1l-nav"><span class="mock-logo t1l-logo">CP</span><div class="mock-links"><span class="mock-link t1l-link">Projects</span><span class="mock-link t1l-link">Blog</span><span class="mock-link t1l-link">About</span></div></div>
+        <div class="mock-hero t1l-hero grain">
+          <div class="mock-name t1l-name">Chris Pipitone</div>
+          <div class="mock-sub t1l-sub">Software Engineer</div>
+          <div class="mock-bio t1l-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t1l-content">
+          <div class="mock-section-bar t1l-bar"><span class="mock-section-label t1l-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t1l-card"><div class="mock-card-img t1l-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t1l-card-title">Motor Controller</div><div class="mock-card-desc t1l-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t1l-card-tag">Firmware</span><span class="mock-card-gh t1l-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t1l-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t1l-card-title">Data Pipeline</div><div class="mock-card-desc t1l-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t1l-card-tag">Go</span><span class="mock-card-gh t1l-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Light</div>
+    </div>
+    <div>
+      <div class="mock">
+        <div class="mock-nav t1d-nav"><span class="mock-logo t1d-logo">CP</span><div class="mock-links"><span class="mock-link t1d-link">Projects</span><span class="mock-link t1d-link">Blog</span><span class="mock-link t1d-link">About</span></div></div>
+        <div class="mock-hero t1d-hero">
+          <div class="mock-name t1d-name">Chris Pipitone</div>
+          <div class="mock-sub t1d-sub">Software Engineer</div>
+          <div class="mock-bio t1d-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t1d-content">
+          <div class="mock-section-bar t1d-bar"><span class="mock-section-label t1d-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t1d-card"><div class="mock-card-img t1d-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t1d-card-title">Motor Controller</div><div class="mock-card-desc t1d-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t1d-card-tag">Firmware</span><span class="mock-card-gh t1d-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t1d-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t1d-card-title">Data Pipeline</div><div class="mock-card-desc t1d-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t1d-card-tag">Go</span><span class="mock-card-gh t1d-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Dark</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ THEME 2 ══ -->
+<div class="theme-block">
+  <div class="theme-title">Theme 2 — Walnut & Olive</div>
+  <p class="theme-concept">Dark walnut replaces navy for structure. Olive green as the accent color. Mahogany red for links and interaction. Warmest, most "leather goods" of the four. Light mode feels like aged parchment. Dark mode like a walnut workshop at night.</p>
+
+  <div class="swatches">
+    <div class="swatch-wrap"><div class="swatch" style="background:#2a1f0e"></div><span class="swatch-hex">#2A1F0E</span><span class="swatch-name">Walnut</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#556B2F"></div><span class="swatch-hex">#556B2F</span><span class="swatch-name">Olive</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#6B2D2D"></div><span class="swatch-hex">#6B2D2D</span><span class="swatch-name">Mahogany</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#f0ead8; border:1px solid #333"></div><span class="swatch-hex">#F0EAD8</span><span class="swatch-name">Parchment</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#1a1008"></div><span class="swatch-hex">#1A1008</span><span class="swatch-name">Dark walnut</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#5a4a30"></div><span class="swatch-hex">#5A4A30</span><span class="swatch-name">Leather</span></div>
+  </div>
+
+  <div class="preview-pair">
+    <div>
+      <div class="mock">
+        <div class="mock-nav t2l-nav"><span class="mock-logo t2l-logo">CP</span><div class="mock-links"><span class="mock-link t2l-link">Projects</span><span class="mock-link t2l-link">Blog</span><span class="mock-link t2l-link">About</span></div></div>
+        <div class="mock-hero t2l-hero grain">
+          <div class="mock-name t2l-name">Chris Pipitone</div>
+          <div class="mock-sub t2l-sub">Software Engineer</div>
+          <div class="mock-bio t2l-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t2l-content">
+          <div class="mock-section-bar t2l-bar"><span class="mock-section-label t2l-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t2l-card"><div class="mock-card-img t2l-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t2l-card-title">Motor Controller</div><div class="mock-card-desc t2l-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t2l-card-tag">Firmware</span><span class="mock-card-gh t2l-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t2l-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t2l-card-title">Data Pipeline</div><div class="mock-card-desc t2l-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t2l-card-tag">Go</span><span class="mock-card-gh t2l-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Light</div>
+    </div>
+    <div>
+      <div class="mock">
+        <div class="mock-nav t2d-nav"><span class="mock-logo t2d-logo">CP</span><div class="mock-links"><span class="mock-link t2d-link">Projects</span><span class="mock-link t2d-link">Blog</span><span class="mock-link t2d-link">About</span></div></div>
+        <div class="mock-hero t2d-hero">
+          <div class="mock-name t2d-name">Chris Pipitone</div>
+          <div class="mock-sub t2d-sub">Software Engineer</div>
+          <div class="mock-bio t2d-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t2d-content">
+          <div class="mock-section-bar t2d-bar"><span class="mock-section-label t2d-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t2d-card"><div class="mock-card-img t2d-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t2d-card-title">Motor Controller</div><div class="mock-card-desc t2d-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t2d-card-tag">Firmware</span><span class="mock-card-gh t2d-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t2d-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t2d-card-title">Data Pipeline</div><div class="mock-card-desc t2d-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t2d-card-tag">Go</span><span class="mock-card-gh t2d-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Dark</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ THEME 3 ══ -->
+<div class="theme-block">
+  <div class="theme-title">Theme 3 — Hunter Green & Mahogany</div>
+  <p class="theme-concept">Hunter green takes the structural role (nav, section bands). Mahogany red for accents and links. Off-white/cream light mode. Near-black dark mode with forest undertone. Feels like field gear — precision without flash.</p>
+
+  <div class="swatches">
+    <div class="swatch-wrap"><div class="swatch" style="background:#1e3a1e"></div><span class="swatch-hex">#1E3A1E</span><span class="swatch-name">Hunter</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#7a2020"></div><span class="swatch-hex">#7A2020</span><span class="swatch-name">Mahogany</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#f0ece4; border:1px solid #333"></div><span class="swatch-hex">#F0ECE4</span><span class="swatch-name">Cream</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#101810"></div><span class="swatch-hex">#101810</span><span class="swatch-name">Forest dark</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#6a9060"></div><span class="swatch-hex">#6A9060</span><span class="swatch-name">Sage</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#4a5a48"></div><span class="swatch-hex">#4A5A48</span><span class="swatch-name">Muted green</span></div>
+  </div>
+
+  <div class="preview-pair">
+    <div>
+      <div class="mock">
+        <div class="mock-nav t3l-nav"><span class="mock-logo t3l-logo">CP</span><div class="mock-links"><span class="mock-link t3l-link">Projects</span><span class="mock-link t3l-link">Blog</span><span class="mock-link t3l-link">About</span></div></div>
+        <div class="mock-hero t3l-hero grain">
+          <div class="mock-name t3l-name">Chris Pipitone</div>
+          <div class="mock-sub t3l-sub">Software Engineer</div>
+          <div class="mock-bio t3l-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t3l-content">
+          <div class="mock-section-bar t3l-bar"><span class="mock-section-label t3l-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t3l-card"><div class="mock-card-img t3l-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t3l-card-title">Motor Controller</div><div class="mock-card-desc t3l-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t3l-card-tag">Firmware</span><span class="mock-card-gh t3l-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t3l-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t3l-card-title">Data Pipeline</div><div class="mock-card-desc t3l-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t3l-card-tag">Go</span><span class="mock-card-gh t3l-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Light</div>
+    </div>
+    <div>
+      <div class="mock">
+        <div class="mock-nav t3d-nav"><span class="mock-logo t3d-logo">CP</span><div class="mock-links"><span class="mock-link t3d-link">Projects</span><span class="mock-link t3d-link">Blog</span><span class="mock-link t3d-link">About</span></div></div>
+        <div class="mock-hero t3d-hero">
+          <div class="mock-name t3d-name">Chris Pipitone</div>
+          <div class="mock-sub t3d-sub">Software Engineer</div>
+          <div class="mock-bio t3d-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t3d-content">
+          <div class="mock-section-bar t3d-bar"><span class="mock-section-label t3d-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t3d-card"><div class="mock-card-img t3d-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t3d-card-title">Motor Controller</div><div class="mock-card-desc t3d-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t3d-card-tag">Firmware</span><span class="mock-card-gh t3d-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t3d-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t3d-card-title">Data Pipeline</div><div class="mock-card-desc t3d-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t3d-card-tag">Go</span><span class="mock-card-gh t3d-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Dark</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ THEME 4 ══ -->
+<div class="theme-block">
+  <div class="theme-title">Theme 4 — Forge & Grain</div>
+  <p class="theme-concept">Most distinctive. Near-black charcoal structure. Warm brass/amber (#8B6B3A) as the identity accent — name, sub-title, decorative line. Mahogany for links. Sage green tags. Light mode: warm cream with near-black structure. Dark: near-black with amber warmth. Feels like a machined part or a well-oiled tool.</p>
+
+  <div class="swatches">
+    <div class="swatch-wrap"><div class="swatch" style="background:#1a1a18"></div><span class="swatch-hex">#1A1A18</span><span class="swatch-name">Charcoal</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#8B6B3A"></div><span class="swatch-hex">#8B6B3A</span><span class="swatch-name">Brass</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#6B2D2D"></div><span class="swatch-hex">#6B2D2D</span><span class="swatch-name">Mahogany</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#3a5a30"></div><span class="swatch-hex">#3A5A30</span><span class="swatch-name">Sage dark</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#f5f0e4; border:1px solid #333"></div><span class="swatch-hex">#F5F0E4</span><span class="swatch-name">Warm cream</span></div>
+    <div class="swatch-wrap"><div class="swatch" style="background:#6a9a58"></div><span class="swatch-hex">#6A9A58</span><span class="swatch-name">Sage</span></div>
+  </div>
+
+  <div class="preview-pair">
+    <div>
+      <div class="mock">
+        <div class="mock-nav t4l-nav"><span class="mock-logo t4l-logo">CP</span><div class="mock-links"><span class="mock-link t4l-link">Projects</span><span class="mock-link t4l-link">Blog</span><span class="mock-link t4l-link">About</span></div></div>
+        <div class="mock-hero t4l-hero grain">
+          <div class="mock-name t4l-name">Chris Pipitone</div>
+          <div class="mock-sub t4l-sub">Software Engineer</div>
+          <div class="mock-bio t4l-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t4l-content">
+          <div class="mock-section-bar t4l-bar"><span class="mock-section-label t4l-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t4l-card"><div class="mock-card-img t4l-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t4l-card-title">Motor Controller</div><div class="mock-card-desc t4l-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t4l-card-tag">Firmware</span><span class="mock-card-gh t4l-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t4l-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t4l-card-title">Data Pipeline</div><div class="mock-card-desc t4l-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t4l-card-tag">Go</span><span class="mock-card-gh t4l-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Light</div>
+    </div>
+    <div>
+      <div class="mock">
+        <div class="mock-nav t4d-nav"><span class="mock-logo t4d-logo">CP</span><div class="mock-links"><span class="mock-link t4d-link">Projects</span><span class="mock-link t4d-link">Blog</span><span class="mock-link t4d-link">About</span></div></div>
+        <div class="mock-hero t4d-hero">
+          <div class="mock-name t4d-name">Chris Pipitone</div>
+          <div class="mock-sub t4d-sub">Software Engineer</div>
+          <div class="mock-bio t4d-bio">I build systems at the intersection of software, firmware, and hardware.</div>
+        </div>
+        <div class="t4d-content">
+          <div class="mock-section-bar t4d-bar"><span class="mock-section-label t4d-bar-label">Featured Projects</span></div>
+          <div class="mock-content">
+            <div class="mock-cards">
+              <div class="mock-card t4d-card"><div class="mock-card-img t4d-card-img">[ img ]</div><div class="mock-card-body"><div class="mock-card-title t4d-card-title">Motor Controller</div><div class="mock-card-desc t4d-card-desc">Firmware for embedded motor control.</div><div class="mock-card-foot"><span class="mock-card-tag t4d-card-tag">Firmware</span><span class="mock-card-gh t4d-card-gh">↗ GH</span></div></div></div>
+              <div class="mock-card t4d-card"><div class="mock-card-body" style="padding-top:12px"><div class="mock-card-title t4d-card-title">Data Pipeline</div><div class="mock-card-desc t4d-card-desc">Distributed ingestion in Go.</div><div class="mock-card-foot"><span class="mock-card-tag t4d-card-tag">Go</span><span class="mock-card-gh t4d-card-gh">↗ GH</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-label">Dark</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

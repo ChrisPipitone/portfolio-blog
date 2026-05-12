@@ -1,0 +1,135 @@
+---
+import Base from "./Base.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { title, description, date, tags, github } = project.data;
+
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+});
+---
+
+<Base title={title} description={description}>
+  <div class="pp-nav-band">
+    <div class="pp-nav-band__inner">
+      <a href="/projects" class="pp-back">← Projects</a>
+    </div>
+  </div>
+
+  <main class="pp-main">
+    <div class="pp-header">
+      <h1 class="pp-title">{title}</h1>
+
+      <div class="pp-meta">
+        <span class="pp-meta__date">{formattedDate}</span>
+
+        {tags.map((tag) => (
+          <span class="pp-meta__tag">{tag}</span>
+        ))}
+
+        {github && (
+          <a
+            href={github}
+            class="pp-meta__github"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ↗ GitHub
+          </a>
+        )}
+      </div>
+
+      <hr class="pp-divider" />
+    </div>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </main>
+</Base>
+
+<style>
+  .pp-nav-band {
+    background-color: var(--color-nav);
+    padding: 0.5rem 0;
+  }
+
+  .pp-nav-band__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .pp-back {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .pp-back:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .pp-main {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .pp-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin-bottom: 0.75rem;
+  }
+
+  .pp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pp-meta__date {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .pp-meta__tag {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-color: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .pp-meta__github {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+  }
+
+  .pp-meta__github:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .pp-divider {
+    border: none;
+    border-top: 1px solid var(--color-divider);
+    margin-bottom: 2rem;
+  }
+</style>

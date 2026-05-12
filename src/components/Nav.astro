@@ -1,0 +1,106 @@
+---
+import { site } from "../config/site";
+import IconSun from "./icons/IconSun.astro";
+import IconMoon from "./icons/IconMoon.astro";
+---
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">{site.name.split(" ").map(w => w[0]).join("")}</a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {site.nav.map((item) => (
+        <a href={item.href} class="nav__link">{item.label}</a>
+      ))}
+    </nav>
+
+    <button class="nav__theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <!-- Shown in dark mode (click to go light). Swap icon: edit src/components/icons/IconSun.astro -->
+      <span class="icon icon--sun"><IconSun /></span>
+      <!-- Shown in light mode (click to go dark). Swap icon: edit src/components/icons/IconMoon.astro -->
+      <span class="icon icon--moon"><IconMoon /></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("theme-toggle")!;
+
+  toggle.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("theme", next);
+  });
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--color-nav);
+    height: var(--nav-height);
+  }
+
+  .nav__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__logo {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #F5F2ED;
+    letter-spacing: 0.05em;
+  }
+
+  .nav__logo:hover {
+    color: #ffffff;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 1.75rem;
+  }
+
+  .nav__link {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-nav-link);
+    transition: color 0.15s ease;
+  }
+
+  .nav__link:hover {
+    color: #F5F2ED;
+  }
+
+  .nav__theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    color: var(--color-nav-link);
+    transition: color 0.15s ease;
+  }
+
+  .nav__theme-toggle:hover {
+    color: #F5F2ED;
+  }
+
+  /* Show moon in light mode, sun in dark mode */
+  .icon--sun  { display: none; }
+  .icon--moon { display: block; }
+
+  :global([data-theme="dark"]) .icon--sun  { display: block; }
+  :global([data-theme="dark"]) .icon--moon { display: none; }
+</style>

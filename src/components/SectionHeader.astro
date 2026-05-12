@@ -1,0 +1,33 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="section-header">
+  <div class="section-header__inner">
+    <span class="section-header__label">{label}</span>
+  </div>
+</div>
+
+<style>
+  .section-header {
+    background-color: var(--color-section-band);
+  }
+
+  .section-header__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0.625rem 1.5rem;
+  }
+
+  .section-header__label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-band-label);
+  }
+</style>
