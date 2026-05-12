@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  site: "https://example.com", // update when domain is set — must match src/config/site.ts
+  site: "https://chrispipitone.com",
 
   vite: {
     plugins: [tailwindcss()],
