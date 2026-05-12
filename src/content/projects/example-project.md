@@ -4,6 +4,7 @@ description: "A placeholder project showing how the project page layout works. R
 date: 2026-01-15
 tags: ["Firmware", "C", "Hardware"]
 github: "https://github.com/chrispipitone"
+image: /src/assets/images/projects/example-project/thumbnail.svg
 featured: true
 draft: false
 ---
