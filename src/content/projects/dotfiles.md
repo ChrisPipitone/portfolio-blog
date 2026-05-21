@@ -24,6 +24,9 @@ Soo I've been using the lazy plugin manager for NeoVim. After trying all the 'nv
 Hyprland I basically ripped off the Omarchy configs and expanded on it slightly with my old config when I solo ran arch for a few months(more later of course when i have time)
 The rest is just gaurding that my configs don't break on Mac because I do enjoy using my mac for dev a lot more now and WSL for work because well.
 
+Here's a snapshot from my Mac
+![image](../../assets/images/projects/dotfiles/vim-screenshot.png)
+
 ## The Misery
 
 Even now at my current employment I'm stuck with windows, neovim is out right disallowed on work PC's... great... glad I work from home
