@@ -5,7 +5,7 @@ date: 2026-01-15
 tags: ["Firmware", "C", "Hardware"]
 github: "https://github.com/chrispipitone"
 image: /src/assets/images/projects/example-project/thumbnail.svg
-featured: true
+featured: false
 draft: false
 ---
 

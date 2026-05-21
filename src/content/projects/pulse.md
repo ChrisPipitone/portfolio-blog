@@ -4,7 +4,7 @@ description: "Group travel organizer — shared trips, shared decisions, less ba
 date: 2026-05-19
 tags: ["Next.js", "React", "TypeScript", "Tailwind", "Supabase", "Vercel"]
 status: "wip"
-featured: false
+featured: true
 draft: false
 ---
 

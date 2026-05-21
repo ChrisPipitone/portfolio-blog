@@ -4,7 +4,7 @@ description: "Payroll system from a college group project — being refactored a
 date: 2026-05-19
 tags: ["C++", "SQLite", "Makefile"]
 status: "wip"
-featured: false
+featured: true
 draft: false
 ---
 
