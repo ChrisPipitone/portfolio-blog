@@ -9,10 +9,6 @@ const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const featured = allProjects
   .filter((p) => p.data.featured)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const recentPosts = (await getCollection("blog", ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
 ---
 
 <Base>
@@ -41,31 +37,6 @@ const recentPosts = (await getCollection("blog", ({ data }) => !data.draft))
     </>
   )}
 
-  {recentPosts.length > 0 && (
-    <>
-      <SectionHeader label="Recent Writing" />
-      <section class="content-band">
-        <div class="content-band__inner">
-          <ul class="post-list">
-            {recentPosts.map((post) => (
-              <li class="post-list__item">
-                <a href={`/blog/${post.id}`} class="post-list__title">
-                  {post.data.title}
-                </a>
-                <span class="post-list__date">
-                  {new Date(post.data.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                  })}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <a href="/blog" class="see-all">All posts →</a>
-        </div>
-      </section>
-    </>
-  )}
 </Base>
 
 <style>
@@ -85,38 +56,6 @@ const recentPosts = (await getCollection("blog", ({ data }) => !data.draft))
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: 1rem;
     margin-bottom: 1.25rem;
-  }
-
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.25rem;
-  }
-
-  .post-list__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.625rem 0;
-    border-bottom: 1px solid var(--color-divider);
-  }
-
-  .post-list__title {
-    font-family: var(--font-heading);
-    font-size: 0.9375rem;
-    color: var(--color-text-heading);
-  }
-
-  .post-list__title:hover {
-    color: var(--color-accent);
-  }
-
-  .post-list__date {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    white-space: nowrap;
   }
 
   .see-all {

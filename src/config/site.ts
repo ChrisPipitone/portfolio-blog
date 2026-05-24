@@ -5,7 +5,6 @@ export const site = {
   url: "https://chrispipitone.com",
   nav: [
     { label: "Projects", href: "/projects" },
-    { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
   ],
   socials: {

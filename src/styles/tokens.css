@@ -58,25 +58,25 @@
 [data-theme="dark"] {
   --color-bg:           #1A1A1A;
   --color-bg-card:      #212121;
-  --color-bg-code:      #181818;
+  --color-bg-code:      #242424;
 
   --color-nav:          #141414;
   --color-nav-text:     #E8E0D8;
-  --color-nav-link:     #404040;
+  --color-nav-link:     #8898a8;
   --color-section-band: #141414;
-  --color-band-label:   #303030;
+  --color-band-label:   #606060;
 
   --color-text-heading: #E8E0D8;
-  --color-text-body:    #909090;
-  --color-text-muted:   #505050;
+  --color-text-body:    #b0aba5;
+  --color-text-muted:   #787068;
 
   --color-accent:       #7A2020;
   --color-accent-hover: #9a2828;
 
   --color-border:       #2a2a2a;
-  --color-border-code:  #2a2a2a;
+  --color-border-code:  #333;
   --color-divider:      #2a2a2a;
 
   --color-tag-bg:       #2a2020;
-  --color-tag-text:     #7a3030;
+  --color-tag-text:     #c08080;
 }
