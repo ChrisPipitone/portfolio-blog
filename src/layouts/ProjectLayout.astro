@@ -1,5 +1,6 @@
 ---
 import Base from "./Base.astro";
+import Footer from "../components/Footer.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, date, tags, github } = project.data;
+const { title, description, date, tags, github, status } = project.data;
 
 const formattedDate = new Date(date).toLocaleDateString("en-US", {
   year: "numeric",
@@ -24,7 +25,11 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 
   <main class="pp-main">
     <div class="pp-header">
-      <h1 class="pp-title">{title}</h1>
+      <div class="pp-title-row">
+        <h1 class="pp-title">{title}</h1>
+        {status === "wip" && <span class="pp-badge pp-badge--wip">WIP</span>}
+        {status === "archived" && <span class="pp-badge pp-badge--archived">Archived</span>}
+      </div>
 
       <div class="pp-meta">
         <span class="pp-meta__date">{formattedDate}</span>
@@ -52,12 +57,14 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
       <slot />
     </div>
   </main>
+
+  <Footer />
 </Base>
 
 <style>
   .pp-nav-band {
     background-color: var(--color-nav);
-    padding: 0.5rem 0;
+    padding: 0.625rem 0;
   }
 
   .pp-nav-band__inner {
@@ -68,14 +75,14 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 
   .pp-back {
     font-family: var(--font-body);
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(249, 247, 244, 0.5);
+    transition: color 0.15s;
   }
 
   .pp-back:hover {
-    color: var(--color-accent-hover);
+    color: var(--color-nav-link-hover);
   }
 
   .pp-main {
@@ -84,19 +91,49 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
     padding: 2.5rem 1.5rem 5rem;
   }
 
+  .pp-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
   .pp-title {
     font-family: var(--font-heading);
     font-size: clamp(1.5rem, 4vw, 2.25rem);
     font-weight: 700;
     color: var(--color-text-heading);
-    margin-bottom: 0.75rem;
+    line-height: 1.1;
+  }
+
+  .pp-badge {
+    font-family: var(--font-body);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+  }
+
+  .pp-badge--wip {
+    background-color: var(--color-badge-wip-bg);
+    color: var(--color-badge-wip-text);
+  }
+
+  .pp-badge--archived {
+    background-color: var(--color-tag-bg);
+    color: var(--color-text-muted);
   }
 
   .pp-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.625rem;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
   }
 
@@ -108,13 +145,12 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 
   .pp-meta__tag {
     font-family: var(--font-body);
-    font-size: 0.5625rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 0.625rem;
+    font-weight: 500;
     background-color: var(--color-tag-bg);
     color: var(--color-tag-text);
     padding: 0.2rem 0.5rem;
-    border-radius: 2px;
+    border-radius: 100px;
   }
 
   .pp-meta__github {

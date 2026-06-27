@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
@@ -20,15 +21,18 @@ const featured = allProjects
       <section class="content-band">
         <div class="content-band__inner">
           <div class="project-grid">
-            {featured.map((project) => (
-              <ProjectCard
-                title={project.data.title}
-                description={project.data.description}
-                tags={project.data.tags}
-                href={`/projects/${project.id}`}
-                github={project.data.github}
-                image={project.data.image}
-              />
+            {featured.map((project, i) => (
+              <div class="fade-in" style={`transition-delay: ${i * 0.07}s`}>
+                <ProjectCard
+                  title={project.data.title}
+                  description={project.data.description}
+                  tags={project.data.tags}
+                  href={`/projects/${project.id}`}
+                  github={project.data.github}
+                  image={project.data.image}
+                  status={project.data.status}
+                />
+              </div>
             ))}
           </div>
           <a href="/projects" class="see-all">All projects →</a>
@@ -37,12 +41,12 @@ const featured = allProjects
     </>
   )}
 
+  <Footer />
 </Base>
 
 <style>
   .content-band {
-    background-color: var(--color-bg);
-    padding: 2rem 0 2.5rem;
+    padding: 1.5rem 0 3rem;
   }
 
   .content-band__inner {
@@ -55,12 +59,24 @@ const featured = allProjects
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: 1rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
+
+  /* ensure cards fill their fade-in wrappers */
+  .project-grid .fade-in {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-grid .fade-in > :global(.card) {
+    flex: 1;
+  }
+
 
   .see-all {
     font-family: var(--font-body);
     font-size: 0.8125rem;
+    font-weight: 500;
     color: var(--color-accent);
   }
 

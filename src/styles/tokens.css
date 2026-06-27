@@ -1,44 +1,46 @@
 /*
   Design tokens — single source of truth for all visual decisions.
-  To change the theme, edit values here. Nothing else needs to change.
-
-  Fonts are loaded in src/layouts/Base.astro — update the Google Fonts
-  URL there if switching font families, then update the var values below.
+  Fonts loaded in src/layouts/Base.astro — update the Google Fonts URL there
+  if switching families, then update the var values below.
 */
 
 :root {
   /* ── Fonts ── */
-  --font-heading: "Libre Baskerville", Georgia, serif;
-  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-heading: "Roboto Slab", Georgia, serif;   /* h1, nav logo */
+  --font-body:    "Inter", system-ui, sans-serif;  /* everything else */
   --font-mono:    "Space Mono", "Courier New", monospace;
 
   /* ── Light mode (default) ── */
-  --color-bg:           #F5F2ED;
+  --color-bg:           #F9F7F4;
   --color-bg-card:      #ffffff;
-  --color-bg-code:      #f8f8f6;
+  --color-bg-code:      #f4f4f2;
 
-  --color-nav:          #1C2B4A;
-  --color-nav-text:     #F5F2ED;
-  --color-nav-link:     #7a9ab5;
-  --color-section-band: #1C2B4A;
-  --color-band-label:   #7a9ab5;
+  --color-nav:          #1C1A20;
+  --color-nav-text:     #F9F7F4;
+  --color-nav-link:     rgba(249, 247, 244, 0.38);
+  --color-nav-link-hover: #C8942A;
 
-  --color-text-heading: #1C2B4A;
-  --color-text-body:    #4a4540;
-  --color-text-muted:   #7a7060;
+  --color-section-label: #999999;
 
-  --color-accent:       #7A2020;   /* mahogany — links, hover, left-border */
-  --color-accent-hover: #5a1515;
+  --color-text-heading: #111111;
+  --color-text-body:    #444444;
+  --color-text-muted:   #888888;
 
-  --color-border:       #e0dbd2;
-  --color-border-code:  #ddd8cf;
-  --color-divider:      #ddd8cf;
+  --color-accent:       #C8942A;
+  --color-accent-hover: #A07520;
 
-  --color-tag-bg:       #1C2B4A;
-  --color-tag-text:     #F5F2ED;
+  --color-border:       rgba(0, 0, 0, 0.07);
+  --color-border-code:  rgba(0, 0, 0, 0.1);
+  --color-divider:      rgba(0, 0, 0, 0.07);
 
-  /* ── Grain texture (hero background) ── */
-  --hero-grain-opacity: 0.045;
+  --color-tag-bg:       #f0ede8;
+  --color-tag-text:     #666666;
+
+  --color-badge-wip-bg:   #FEF3C7;
+  --color-badge-wip-text: #92400E;
+
+  --shadow-card:       0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.08);
 
   /* ── Spacing scale ── */
   --space-xs:  0.25rem;
@@ -49,34 +51,41 @@
   --space-2xl: 4rem;
 
   /* ── Layout ── */
-  --content-width: 72rem;   /* max-width for content */
-  --prose-width:   42rem;   /* max-width for blog/project prose */
-  --nav-height:    3.25rem;
+  --content-width: 72rem;
+  --prose-width:   42rem;
+  --nav-height:    3.5rem;
 }
 
 /* ── Dark mode ── */
 [data-theme="dark"] {
-  --color-bg:           #1A1A1A;
-  --color-bg-card:      #212121;
-  --color-bg-code:      #242424;
+  --color-bg:           #0E0E10;
+  --color-bg-card:      #1A1A1C;
+  --color-bg-code:      #141416;
 
-  --color-nav:          #141414;
-  --color-nav-text:     #E8E0D8;
-  --color-nav-link:     #8898a8;
-  --color-section-band: #141414;
-  --color-band-label:   #606060;
+  --color-nav:          #111010;
+  --color-nav-text:     #E8E6E2;
+  --color-nav-link:     rgba(232, 230, 226, 0.3);
+  --color-nav-link-hover: #D4A040;
 
-  --color-text-heading: #E8E0D8;
-  --color-text-body:    #b0aba5;
-  --color-text-muted:   #787068;
+  --color-section-label: #555555;
 
-  --color-accent:       #7A2020;
-  --color-accent-hover: #9a2828;
+  --color-text-heading: #E8E6E2;
+  --color-text-body:    #909090;
+  --color-text-muted:   #555555;
 
-  --color-border:       #2a2a2a;
-  --color-border-code:  #333;
-  --color-divider:      #2a2a2a;
+  --color-accent:       #D4A040;
+  --color-accent-hover: #C8942A;
 
-  --color-tag-bg:       #2a2020;
-  --color-tag-text:     #c08080;
+  --color-border:       rgba(255, 255, 255, 0.06);
+  --color-border-code:  rgba(255, 255, 255, 0.08);
+  --color-divider:      rgba(255, 255, 255, 0.06);
+
+  --color-tag-bg:       #2A2018;
+  --color-tag-text:     #A07830;
+
+  --color-badge-wip-bg:   #2D1F00;
+  --color-badge-wip-text: #D4A040;
+
+  --shadow-card:       0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.45);
 }

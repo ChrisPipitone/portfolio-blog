@@ -30,35 +30,53 @@ Chris's personal portfolio site. Goal: showcase work, have a voice, keep it low-
 ## Design — LOCKED
 
 **Typography**
-- Headings: Libre Baskerville (serif, heavy, legible)
-- Body / UI: DM Sans
-- Code: Space Mono
+- Display / h1 / nav logo: Roboto Slab (serif, 700) — `--font-heading`
+- Body / UI / h2-h6: Inter — `--font-body`
+- Code: Space Mono — `--font-mono`
 
 **Layout**
-- Navy nav bar (sticky)
-- Grain texture hero section (name, tagline, bio)
-- Navy section header bands between content sections
-- Clean off-white content areas between bands
+- Near-black nav bar (`#1C1A20`), sticky
+- Clean hero: large Roboto Slab name, Inter tagline+bio, skills pill row
+- Minimal section headers: hairline border-top + small uppercase label (no colored bands)
+- White cards with gold top-border accent, subtle shadow, hover lift
+- Matching slate footer (bookends with nav)
 
-**Theme: Gunmetal & Mahogany**
+**Theme: Slate & Gold**
 
 Light mode:
-- Base: `#F5F2ED` (off-white, grain texture)
-- Structure (nav, bands): `#1C2B4A` (navy)
-- Accent / links: `#7A2020` (mahogany red)
-- Body text: `#4a4540`
-- Card bg: `#ffffff`, border: `#e0dbd2`, left accent: `3px solid #7A2020`
+- Base: `#F9F7F4` (warm off-white)
+- Nav / footer: `#1C1A20` (near-black, warm)
+- Accent / links: `#C8942A` (gold)
+- Body text: `#444444`
+- Muted text: `#888888`
+- Card bg: `#ffffff`, border: `rgba(0,0,0,0.07)`, top accent: `3px solid #C8942A`
+- Tags / skills: `background #f0ede8`, `color #666666`, border-radius pill
+- WIP badge: `background #FEF3C7`, `color #92400E`
 
 Dark mode:
-- Base: `#1A1A1A` (gunmetal/charcoal)
-- Nav: `#141414`
-- Accent / links: `#7A2020` (mahogany red)
-- Headings: `#E8E0D8` (warm white)
-- Body text: `#606060` (stone)
-- Card bg: `#212121`, border: `#2a2a2a`, left accent: `3px solid #7A2020`
-- Tags: `background #2a2020`, `color #7a3030`
+- Base: `#0E0E10`
+- Nav / footer: `#111010` (near-black)
+- Accent / links: `#D4A040` (slightly brighter gold)
+- Headings: `#E8E6E2` (warm white)
+- Body text: `#909090`
+- Card bg: `#1A1A1C`, border: `rgba(255,255,255,0.06)`, top accent: `3px solid #D4A040`
+- Tags: `background #2A2018`, `color #A07830`
+- WIP badge: `background #2D1F00`, `color #D4A040`
 
-Code blocks (both modes): light background `#f8f8f6`, border `#ddd8cf`, dark text, syntax color only — no dark panel.
+Code blocks (both modes): `#f4f4f2` bg light / `#141416` bg dark, no syntax dark panel.
+
+**Cards**
+- `border-top: 3px solid var(--color-accent)` (gold top accent, not left)
+- `box-shadow: var(--shadow-card)` + hover lift (`translateY(-2px)`) + stronger shadow
+- WIP/Archived badge rendered inline with title in card header row
+- Tags: pill style (border-radius: 100px), warm bg
+
+**Features added**
+- Skills row in hero (from `site.skills` array in `src/config/site.ts`)
+- Resume link in nav (set `site.resume = "/resume.pdf"` once PDF added to `public/`)
+- GitHub + LinkedIn in footer (from `site.socials`)
+- Scroll fade-in on project cards and post list items (IntersectionObserver, staggered)
+- `status` frontmatter field on projects (`"wip"` | `"shipped"` | `"archived"`) — renders badge on card and project page
 
 ## Audience / Purpose
 

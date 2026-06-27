@@ -1,0 +1,28 @@
+---
+import { site } from "../config/site";
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__copy">© {new Date().getFullYear()} {site.name}</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-nav);
+    margin-top: auto;
+  }
+
+  .site-footer__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .site-footer__copy {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(249, 247, 244, 0.35);
+  }
+</style>
