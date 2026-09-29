@@ -1,86 +1,69 @@
 ---
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import Footer from "../components/Footer.astro";
+import Fetch from "../components/Fetch.astro";
+import ProjectSlab from "../components/ProjectSlab.astro";
 import { getCollection } from "astro:content";
 
-const allProjects = await getCollection("projects", ({ data }) => !data.draft);
-const featured = allProjects
-  .filter((p) => p.data.featured)
+const featured = (await getCollection("projects", ({ data }) => !data.draft && data.featured))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Base>
   <Hero />
+  <Fetch />
 
   {featured.length > 0 && (
-    <>
-      <SectionHeader label="Featured Projects" />
-      <section class="content-band">
-        <div class="content-band__inner">
-          <div class="project-grid">
-            {featured.map((project, i) => (
-              <div class="fade-in" style={`transition-delay: ${i * 0.07}s`}>
-                <ProjectCard
-                  title={project.data.title}
-                  description={project.data.description}
-                  tags={project.data.tags}
-                  href={`/projects/${project.id}`}
-                  github={project.data.github}
-                  image={project.data.image}
-                  status={project.data.status}
-                />
-              </div>
-            ))}
-          </div>
-          <a href="/projects" class="see-all">All projects →</a>
-        </div>
-      </section>
-    </>
-  )}
+    <section class="work" id="work">
+      <div class="work__head">
+        <h2>Work</h2>
+        <a href="/projects">All projects →</a>
+      </div>
 
-  <Footer />
+      {featured.map((project, i) => (
+        <ProjectSlab
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          href={`/projects/${project.id}`}
+          image={project.data.image}
+          status={project.data.status}
+          index={i}
+        />
+      ))}
+    </section>
+  )}
 </Base>
 
 <style>
-  .content-band {
-    padding: 1.5rem 0 3rem;
-  }
-
-  .content-band__inner {
+  .work {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem 2rem;
   }
 
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
+  @media (max-width: 640px) { .work { padding: 0 1.25rem 2rem; } }
 
-  /* ensure cards fill their fade-in wrappers */
-  .project-grid .fade-in {
+  .work__head {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
-  .project-grid .fade-in > :global(.card) {
-    flex: 1;
+  .work__head h2 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 400;
+    margin: 0;
   }
 
-
-  .see-all {
-    font-family: var(--font-body);
+  .work__head a {
     font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-accent);
-  }
-
-  .see-all:hover {
-    color: var(--color-accent-hover);
+    white-space: nowrap;
   }
 </style>
