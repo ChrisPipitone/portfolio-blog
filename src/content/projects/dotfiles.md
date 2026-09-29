@@ -3,6 +3,7 @@ title: "Dotfiles"
 description: "Config files I've painstakingly refined to perfection. (it's never perfect. Configs will never fully configure)"
 date: 2026-05-20
 tags: ["NeoVim", "tmux", "ZSH", "Hyprland", "Mac", "WSL"]
+image: "/src/assets/images/projects/dotfiles/vim-screenshot.png"
 status: "wip"
 featured: true
 draft: false

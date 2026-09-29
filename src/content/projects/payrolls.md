@@ -3,6 +3,7 @@ title: "Payrolls"
 description: "A TUI payroll app in standard C++17, rebuilt from a college group project as a way to shake off rusty C++."
 date: 2026-05-19
 tags: ["C++", "ncurses", "SQLite", "CMake"]
+image: "/images/projects/payrolls/demo.gif"
 status: "hold"
 featured: true
 draft: false
