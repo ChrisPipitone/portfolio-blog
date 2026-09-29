@@ -10,6 +10,8 @@ draft: false
 
 Originally built for a Software Engineering course at CUNY College of Staten Island. Group project, course deadline, delivered in C++/CLI targeting Windows Forms and Microsoft Access.
 
+![Payrolls TUI demo](/images/projects/payrolls/demo.gif)
+
 I hadn't written serious C++ since college and wanted to shake the rust off, so I came back to this project instead of starting from a blank folder. It's not a straight refactor as I originally scoped. It ended up becoming a from scratch TUI rewrite in standard C++17: vim style motions, a panel based view router, a custom layout engine built directly over ncurses, and SQLite persistence through SQLiteCpp. No framework GUI, no ORM.
 
 ## Approach
