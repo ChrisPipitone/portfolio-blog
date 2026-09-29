@@ -1,0 +1,83 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { site } from "../config/site";
+
+const channels = [
+  site.email   && { key: "email",    label: site.email,                    href: `mailto:${site.email}`, external: false },
+  site.socials.github   && { key: "github",   label: "chrispipitone",      href: site.socials.github,   external: true },
+  site.socials.linkedin && { key: "linkedin", label: "chris-pipitone",     href: site.socials.linkedin, external: true },
+  site.resume  && { key: "resume",   label: "Resume (PDF)",                href: site.resume,           external: true },
+].filter(Boolean) as { key: string; label: string; href: string; external: boolean }[];
+---
+
+<Base title="Contact">
+  <SectionHeader label="Contact" />
+
+  <div class="wrap">
+    <dl class="channels">
+      {channels.map((c) => (
+        <div class="channels__row">
+          <dt>{c.key}</dt>
+          <dd>
+            <a
+              href={c.href}
+              target={c.external ? "_blank" : undefined}
+              rel={c.external ? "noopener noreferrer" : undefined}
+            >{c.label}</a>
+          </dd>
+        </div>
+      ))}
+    </dl>
+
+    {!site.email && (
+      <p class="hint">No email set yet — add <code>email</code> to <code>src/config/site.ts</code>.</p>
+    )}
+  </div>
+</Base>
+
+<style>
+  .wrap {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem;
+  }
+
+  @media (max-width: 640px) { .wrap { padding: 2rem 1.25rem 4rem; } }
+
+  .channels {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    max-width: 34rem;
+  }
+
+  .channels__row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  @media (max-width: 480px) {
+    .channels__row { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+
+  dt { color: var(--color-accent); }
+  dd { margin: 0; }
+
+  .hint {
+    margin-top: 1.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+
+  .hint code {
+    font-size: 0.8125rem;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+  }
+</style>
