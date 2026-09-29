@@ -7,8 +7,9 @@ export const site = {
   resume: "/Resume_Backend_6-26-26.pdf",
   portrait: "/images/portrait.svg",
   // Public contact address. Left blank on purpose — set it and /contact shows it.
-  email: "",
-  subline: "I write here not to teach, but to think out loud and shoot my shit.",
+  email: "chrispipitone@protonmail.com",
+  subline:
+    "I write here not to teach, but to think out loud and shoot my shit.",
   skills: [
     "C++",
     "TypeScript",
@@ -20,7 +21,6 @@ export const site = {
   ],
   nav: [
     { label: "Projects", href: "/projects" },
-    { label: "Contact", href: "/contact" },
     //{ label: "About", href: "/about" },
   ],
   socials: {

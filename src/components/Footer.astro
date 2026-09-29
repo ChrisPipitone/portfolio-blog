@@ -4,12 +4,7 @@ import { site } from "../config/site";
 
 <footer class="foot">
   <div class="foot__inner">
-    <span class="foot__copy">© {new Date().getFullYear()} {site.name}</span>
-    <span class="foot__links">
-      {site.socials.github && <a href={site.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-      {site.socials.linkedin && <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-      {site.resume && <a href={site.resume} target="_blank" rel="noopener">Resume</a>}
-    </span>
+    <span>© {new Date().getFullYear()} {site.name}</span>
   </div>
 </footer>
 
@@ -23,24 +18,9 @@ import { site } from "../config/site";
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
     font-size: 0.8125rem;
     color: var(--color-muted);
   }
 
-  .foot__links {
-    display: flex;
-    gap: 1.25rem;
-  }
-
-  .foot__links a {
-    color: var(--color-muted);
-  }
-
-  .foot__links a:hover {
-    color: var(--color-accent);
-  }
+  @media (max-width: 640px) { .foot__inner { padding: 1.75rem 1.25rem; } }
 </style>

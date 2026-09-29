@@ -10,6 +10,13 @@ import { site } from "../config/site";
       {site.nav.map((item) => (
         <a href={item.href} class="nav__link">{item.label}</a>
       ))}
+
+      {site.socials.github && (
+        <a href={site.socials.github} class="nav__link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      )}
+      {site.socials.linkedin && (
+        <a href={site.socials.linkedin} class="nav__link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      )}
     </nav>
 
     {site.resume && (
@@ -72,14 +79,19 @@ import { site } from "../config/site";
     border: 1px solid var(--color-accent-line);
     border-radius: 5px;
     padding: 0.3rem 0.7rem;
+    white-space: nowrap;
   }
 
   .nav__cta:hover {
     background: var(--color-accent-wash);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
     .nav__inner { padding: 0 1.25rem; gap: 1rem; }
     .nav__links { gap: 1rem; }
+  }
+
+  @media (max-width: 520px) {
+    .nav__links { gap: 0.9rem; font-size: 0.75rem; }
   }
 </style>
