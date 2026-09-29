@@ -7,18 +7,21 @@ import { site } from "../config/site";
 <Base title="About">
   <SectionHeader label="About" />
 
-  <main class="main">
+  <div class="wrap">
     <div class="prose">
       <h2>Hi, I'm {site.name}.</h2>
-      <p>Howdy y'all I thew this portfolio site together mainly to have a place to post things. I've been wanting to make youtube videos as a grow along with me this idiot, We'll eventually do something cool. Welp it's been a few months, some shit happened some shit didn't happen and well lets see how lazy / willing I am to create and maintain a portfolio then MAYBE start doing more effort with vidoes. Because really I don't have fun doing not glamorous parts of showcasing what I'm doing <i>I'd rather just do things</i> eh We'll see where this goes. Anyway Jabroni Codes</p>
+      <p>{site.bio}</p>
+      <p>{site.subline}</p>
     </div>
-  </main>
+  </div>
 </Base>
 
 <style>
-  .main {
+  .wrap {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 2.5rem 1.5rem 5rem;
+    padding: 2.5rem 2rem 5rem;
   }
+
+  @media (max-width: 640px) { .wrap { padding: 2rem 1.25rem 4rem; } }
 </style>

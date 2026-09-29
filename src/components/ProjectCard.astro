@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-const allImages = import.meta.glob<{ default: ImageMetadata }>(
+const assetImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/**/*.{jpg,jpeg,png,webp,avif,svg}",
   { eager: true }
 );
@@ -18,187 +18,124 @@ interface Props {
 }
 
 const { title, description, tags, href, github, image, status } = Astro.props;
-const imageData = image ? allImages[image]?.default : undefined;
+
+const asset = image ? assetImages[image]?.default : undefined;
+const publicSrc = !asset && image?.startsWith("/") ? image : undefined;
 ---
 
 <article class="card">
-  {imageData && (
-    <a href={href} class="card__image-link" tabindex="-1" aria-hidden="true">
-      <Image src={imageData} alt={title} class="card__image" loading="lazy" />
-    </a>
-  )}
+  <a class="card__media" href={href} tabindex="-1" aria-hidden="true">
+    {asset && <Image src={asset} alt="" loading="lazy" />}
+    {publicSrc && <img src={publicSrc} alt="" loading="lazy" />}
+    {!asset && !publicSrc && <span class="card__ph">No media yet</span>}
+    {status && <span class={`badge badge--${status} card__badge`}>{status}</span>}
+  </a>
 
   <div class="card__body">
-    <div class="card__header">
-      <h3 class="card__title">
-        <a href={href}>{title}</a>
-      </h3>
-      {status === "wip" && <span class="card__badge card__badge--wip">WIP</span>}
-      {status === "archived" && <span class="card__badge card__badge--archived">Archived</span>}
-      {status === "abandoned" && <span class="card__badge card__badge--archived">Abandoned</span>}
-      {status === "hold" && <span class="card__badge card__badge--archived">On Hold</span>}
-    </div>
+    <h3 class="card__title"><a href={href}>{title}</a></h3>
+    <p class="card__desc">{description}</p>
 
-    <p class="card__description">{description}</p>
+    <ul class="card__tags">
+      {tags.map((tag) => <li>{tag}</li>)}
+    </ul>
 
-    <footer class="card__footer">
-      <div class="card__tags">
-        {tags.map((tag) => (
-          <span class="card__tag">{tag}</span>
-        ))}
-      </div>
-
-      {github && (
-        <a
-          href={github}
-          class="card__github"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`View ${title} on GitHub`}
-        >
-          ↗ GitHub
-        </a>
-      )}
-    </footer>
+    {github && (
+      <a class="card__github" href={github} target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+    )}
   </div>
 </article>
 
 <style>
   .card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-top: 3px solid var(--color-accent);
-    border-radius: 6px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-    position: relative;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 140ms ease, transform 140ms ease;
   }
 
   .card:hover {
-    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-line-2);
     transform: translateY(-2px);
   }
 
-  .card__image-link {
-    display: block;
+  .card__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    background: var(--color-raised);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .card__image {
+  .card__media :global(img) {
     width: 100%;
-    height: 10rem;
+    height: 100%;
     object-fit: cover;
-    display: block;
+  }
+
+  .card__ph {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .card__badge {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
   }
 
   .card__body {
-    padding: 1.25rem 1.25rem 1rem;
+    padding: 1.1rem 1.15rem 1.25rem;
     display: flex;
     flex-direction: column;
     flex: 1;
   }
 
-  .card__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
   .card__title {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    font-size: 1.125rem;
+    margin: 0 0 0.4rem;
   }
 
-  .card__title a {
-    color: var(--color-text-heading);
-  }
+  .card__title a { color: var(--color-heading); }
+  .card__title a:hover { color: var(--color-accent); }
 
-  .card__title a::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
-
-  .card__title a:hover {
-    color: var(--color-accent);
-  }
-
-  .card__badge {
-    font-family: var(--font-body);
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.5rem;
-    border-radius: 100px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    margin-top: 0.1rem;
-  }
-
-  .card__badge--wip {
-    background-color: var(--color-badge-wip-bg);
-    color: var(--color-badge-wip-text);
-  }
-
-  .card__badge--archived {
-    background-color: var(--color-tag-bg);
-    color: var(--color-text-muted);
-  }
-
-  .card__description {
-    font-family: var(--font-body);
-    font-size: 0.8125rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    margin-bottom: 1rem;
+  .card__desc {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.6;
     flex: 1;
   }
 
-  .card__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
   .card__tags {
+    list-style: none;
     display: flex;
-    gap: 0.375rem;
     flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
   }
 
-  .card__tag {
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    background-color: var(--color-tag-bg);
-    color: var(--color-tag-text);
-    padding: 0.2rem 0.5rem;
-    border-radius: 100px;
+  .card__tags li {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    color: var(--color-muted);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
   }
 
   .card__github {
-    font-family: var(--font-body);
+    margin-top: 1rem;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card__github:hover {
-    color: var(--color-accent-hover);
   }
 </style>

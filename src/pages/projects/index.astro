@@ -2,7 +2,6 @@
 import Base from "../../layouts/Base.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
-import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 const projects = (await getCollection("projects", ({ data }) => !data.draft))
@@ -12,8 +11,8 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
 <Base title="Projects">
   <SectionHeader label="Projects" />
 
-  <main class="main">
-    <div class="project-grid">
+  <div class="wrap">
+    <div class="grid">
       {projects.map((project, i) => (
         <div class="fade-in" style={`transition-delay: ${i * 0.07}s`}>
           <ProjectCard
@@ -28,30 +27,30 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
         </div>
       ))}
     </div>
-  </main>
-
-  <Footer />
+  </div>
 </Base>
 
 <style>
-  .main {
+  .wrap {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 1.5rem 1.5rem 5rem;
+    padding: 2rem 2rem 5rem;
   }
 
-  .project-grid {
+  @media (max-width: 640px) { .wrap { padding: 1.5rem 1.25rem 4rem; } }
+
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 1.25rem;
   }
 
-  .project-grid .fade-in {
+  .grid .fade-in {
     display: flex;
     flex-direction: column;
   }
 
-  .project-grid .fade-in > :global(.card) {
+  .grid .fade-in > :global(.card) {
     flex: 1;
   }
 </style>
