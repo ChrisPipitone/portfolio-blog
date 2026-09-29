@@ -2,45 +2,53 @@
   Design tokens — single source of truth for all visual decisions.
   Fonts loaded in src/layouts/Base.astro — update the Google Fonts URL there
   if switching families, then update the var values below.
+
+  Single dark theme. There is no light mode.
 */
 
 :root {
   /* ── Fonts ── */
-  --font-heading: "Roboto Slab", Georgia, serif;   /* h1, nav logo */
-  --font-body:    "Inter", system-ui, sans-serif;  /* everything else */
-  --font-mono:    "Space Mono", "Courier New", monospace;
+  --font-heading: "Archivo", system-ui, sans-serif;
+  --font-body:    "Archivo", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
 
-  /* ── Light mode (default) ── */
-  --color-bg:           #F9F7F4;
-  --color-bg-card:      #ffffff;
-  --color-bg-code:      #f4f4f2;
+  /* ── Surfaces ── */
+  --color-bg:      #0e0f11;
+  --color-panel:   #15171a;
+  --color-raised:  #1b1e22;
+  --color-line:    #262a2f;
+  --color-line-2:  #3c414a;
 
-  --color-nav:          #1C1A20;
-  --color-nav-text:     #F9F7F4;
-  --color-nav-link:     rgba(249, 247, 244, 0.38);
-  --color-nav-link-hover: #C8942A;
+  /* ── Text ── */
+  --color-heading: #f3f1ec;
+  --color-text:    #d6d3cd;
+  --color-muted:   #7e8189;
 
-  --color-section-label: #999999;
+  /* ── Accent (sand) ── */
+  --color-accent:       #e8c39e;
+  --color-accent-hover: #f2d4b4;
+  --color-accent-line:  #453a2d;
+  --color-accent-wash:  #231d16;
 
-  --color-text-heading: #111111;
-  --color-text-body:    #444444;
-  --color-text-muted:   #888888;
+  /* ── Code ── */
+  --color-code-bg: #121417;
 
-  --color-accent:       #C8942A;
-  --color-accent-hover: #A07520;
-
-  --color-border:       rgba(0, 0, 0, 0.07);
-  --color-border-code:  rgba(0, 0, 0, 0.1);
-  --color-divider:      rgba(0, 0, 0, 0.07);
-
-  --color-tag-bg:       #f0ede8;
-  --color-tag-text:     #666666;
-
-  --color-badge-wip-bg:   #FEF3C7;
-  --color-badge-wip-text: #92400E;
-
-  --shadow-card:       0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.08);
+  /* ── Status badges ── */
+  --badge-wip-border:       #453a2d;
+  --badge-wip-text:         #e8c39e;
+  --badge-wip-bg:           #211b14;
+  --badge-shipped-border:   #2d4034;
+  --badge-shipped-text:     #8fa37c;
+  --badge-shipped-bg:       #18201a;
+  --badge-hold-border:      #2f3a45;
+  --badge-hold-text:        #7f9bb5;
+  --badge-hold-bg:          #161d23;
+  --badge-abandoned-border: #45322f;
+  --badge-abandoned-text:   #b58070;
+  --badge-abandoned-bg:     #221918;
+  --badge-archived-border:  #33373d;
+  --badge-archived-text:    #7e8189;
+  --badge-archived-bg:      #1a1d21;
 
   /* ── Spacing scale ── */
   --space-xs:  0.25rem;
@@ -51,41 +59,7 @@
   --space-2xl: 4rem;
 
   /* ── Layout ── */
-  --content-width: 72rem;
-  --prose-width:   42rem;
+  --content-width: 76rem;
+  --prose-width:   44rem;
   --nav-height:    3.5rem;
-}
-
-/* ── Dark mode ── */
-[data-theme="dark"] {
-  --color-bg:           #0E0E10;
-  --color-bg-card:      #1A1A1C;
-  --color-bg-code:      #141416;
-
-  --color-nav:          #111010;
-  --color-nav-text:     #E8E6E2;
-  --color-nav-link:     rgba(232, 230, 226, 0.3);
-  --color-nav-link-hover: #D4A040;
-
-  --color-section-label: #555555;
-
-  --color-text-heading: #E8E6E2;
-  --color-text-body:    #909090;
-  --color-text-muted:   #555555;
-
-  --color-accent:       #D4A040;
-  --color-accent-hover: #C8942A;
-
-  --color-border:       rgba(255, 255, 255, 0.06);
-  --color-border-code:  rgba(255, 255, 255, 0.08);
-  --color-divider:      rgba(255, 255, 255, 0.06);
-
-  --color-tag-bg:       #2A2018;
-  --color-tag-text:     #A07830;
-
-  --color-badge-wip-bg:   #2D1F00;
-  --color-badge-wip-text: #D4A040;
-
-  --shadow-card:       0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.45);
 }
