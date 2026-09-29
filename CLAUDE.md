@@ -29,54 +29,39 @@ Chris's personal portfolio site. Goal: showcase work, have a voice, keep it low-
 
 ## Design — LOCKED
 
+Single dark theme. **There is no light mode** — the toggle and light palette were removed.
+
 **Typography**
-- Display / h1 / nav logo: Roboto Slab (serif, 700) — `--font-heading`
-- Body / UI / h2-h6: Inter — `--font-body`
-- Code: Space Mono — `--font-mono`
+- Display / h1 / nav mark: Archivo 600 — `--font-heading`
+- Body / UI: Archivo — `--font-body`
+- Labels, meta, code, the fetch block: IBM Plex Mono — `--font-mono`
 
 **Layout**
-- Near-black nav bar (`#1C1A20`), sticky
-- Clean hero: large Roboto Slab name, Inter tagline+bio, skills pill row
-- Minimal section headers: hairline border-top + small uppercase label (no colored bands)
-- White cards with gold top-border accent, subtle shadow, hover lift
-- Matching slate footer (bookends with nav)
+- Sticky translucent nav (blurred `#0e0f11`), name mark left, links right, Résumé pill
+- Split hero: portrait left in a bordered frame with sand corner ticks, eyebrow + h1 + bio + subline + two buttons right
+- Neofetch block: "CP" block-glyph logo left, `key → value` spec rows right, palette swatches beneath
+- Projects on the homepage: full-width alternating slabs, media one side / text the other, hairline rule between
+- `/projects`: card grid, 16:10 media, status badge top-right
+- Footer: hairline rule, copyright left, GitHub / LinkedIn / Résumé right
 
-**Theme: Slate & Gold**
+**Theme: Gunmetal & Sand**
 
-Light mode:
-- Base: `#F9F7F4` (warm off-white)
-- Nav / footer: `#1C1A20` (near-black, warm)
-- Accent / links: `#C8942A` (gold)
-- Body text: `#444444`
-- Muted text: `#888888`
-- Card bg: `#ffffff`, border: `rgba(0,0,0,0.07)`, top accent: `3px solid #C8942A`
-- Tags / skills: `background #f0ede8`, `color #666666`, border-radius pill
-- WIP badge: `background #FEF3C7`, `color #92400E`
+- Base: `#0e0f11`, panel `#15171a`, raised `#1b1e22`
+- Hairline: `#262a2f`, hover `#3c414a`
+- Headings: `#f3f1ec`, body `#d6d3cd`, muted `#7e8189`
+- Accent: `#e8c39e` (sand), hover `#f2d4b4`, accent hairline `#453a2d`, wash `#231d16`
+- Code blocks: `#121417` on a `#262a2f` hairline
 
-Dark mode:
-- Base: `#0E0E10`
-- Nav / footer: `#111010` (near-black)
-- Accent / links: `#D4A040` (slightly brighter gold)
-- Headings: `#E8E6E2` (warm white)
-- Body text: `#909090`
-- Card bg: `#1A1A1C`, border: `rgba(255,255,255,0.06)`, top accent: `3px solid #D4A040`
-- Tags: `background #2A2018`, `color #A07830`
-- WIP badge: `background #2D1F00`, `color #D4A040`
+**Status badges** — one shared `.badge` class in `global.css`, one modifier per status
+- `wip` sand · `shipped` green · `hold` blue · `abandoned` clay · `archived` grey
 
-Code blocks (both modes): `#f4f4f2` bg light / `#141416` bg dark, no syntax dark panel.
+**Components**
+- `Hero.astro` — split hero; portrait path from `site.portrait`
+- `Fetch.astro` — neofetch block; content lives in `src/config/stack.ts`
+- `ProjectSlab.astro` — homepage alternating slabs
+- `ProjectCard.astro` — `/projects` grid card
+- Both resolve `image` from either `/src/assets/...` (build-optimised) or `/public/...` (served as-is)
 
-**Cards**
-- `border-top: 3px solid var(--color-accent)` (gold top accent, not left)
-- `box-shadow: var(--shadow-card)` + hover lift (`translateY(-2px)`) + stronger shadow
-- WIP/Archived badge rendered inline with title in card header row
-- Tags: pill style (border-radius: 100px), warm bg
-
-**Features added**
-- Skills row in hero (from `site.skills` array in `src/config/site.ts`)
-- Resume link in nav (set `site.resume = "/resume.pdf"` once PDF added to `public/`)
-- GitHub + LinkedIn in footer (from `site.socials`)
-- Scroll fade-in on project cards and post list items (IntersectionObserver, staggered)
-- `status` frontmatter field on projects (`"wip"` | `"shipped"` | `"archived"`) — renders badge on card and project page
 
 ## Audience / Purpose
 
