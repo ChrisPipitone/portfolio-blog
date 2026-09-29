@@ -14,7 +14,7 @@ interface Props {
   href: string;
   github?: string;
   image?: string;
-  status?: "wip" | "shipped" | "archived";
+  status?: "wip" | "shipped" | "archived" | "abandoned" | "hold";
 }
 
 const { title, description, tags, href, github, image, status } = Astro.props;
@@ -35,6 +35,8 @@ const imageData = image ? allImages[image]?.default : undefined;
       </h3>
       {status === "wip" && <span class="card__badge card__badge--wip">WIP</span>}
       {status === "archived" && <span class="card__badge card__badge--archived">Archived</span>}
+      {status === "abandoned" && <span class="card__badge card__badge--archived">Abandoned</span>}
+      {status === "hold" && <span class="card__badge card__badge--archived">On Hold</span>}
     </div>
 
     <p class="card__description">{description}</p>

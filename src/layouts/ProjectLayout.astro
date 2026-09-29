@@ -29,6 +29,8 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
         <h1 class="pp-title">{title}</h1>
         {status === "wip" && <span class="pp-badge pp-badge--wip">WIP</span>}
         {status === "archived" && <span class="pp-badge pp-badge--archived">Archived</span>}
+        {status === "abandoned" && <span class="pp-badge pp-badge--archived">Abandoned</span>}
+        {status === "hold" && <span class="pp-badge pp-badge--archived">On Hold</span>}
       </div>
 
       <div class="pp-meta">
