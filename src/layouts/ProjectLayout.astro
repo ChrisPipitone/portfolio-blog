@@ -38,7 +38,62 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
       <slot />
     </div>
   </article>
+
+  <dialog class="lightbox">
+    <button class="lightbox__close" type="button" aria-label="Close">ESC ✕</button>
+    <img alt="" />
+  </dialog>
 </Base>
+
+<script>
+  const prose = document.querySelector(".prose");
+  const box = document.querySelector<HTMLDialogElement>(".lightbox");
+  const boxImg = box?.querySelector("img");
+
+  prose?.querySelectorAll("img").forEach((img) => {
+    const figure = document.createElement("figure");
+    figure.className = "shot";
+
+    // Markdown wraps a lone image in a <p>; swap that out so figures are prose-level siblings.
+    const host = img.parentElement;
+    const target = host?.tagName === "P" && host.childNodes.length === 1 ? host : img;
+    target.replaceWith(figure);
+    figure.append(img);
+
+    if (img.alt) {
+      const caption = document.createElement("figcaption");
+      caption.textContent = img.alt;
+      figure.append(caption);
+    }
+
+    const previous = figure.previousElementSibling;
+    const previousImg = previous?.classList.contains("shot")
+      ? previous.querySelector("img")
+      : null;
+
+    if (/-mobile\.\w+$/.test(img.src) && previousImg && /-desktop\.\w+$/.test(previousImg.src)) {
+      const pair = document.createElement("div");
+      pair.className = "shots";
+      previous!.replaceWith(pair);
+      pair.append(previous!, figure);
+    }
+
+    img.addEventListener("click", () => {
+      if (!box || !boxImg) return;
+      boxImg.src = img.currentSrc || img.src;
+      boxImg.alt = img.alt;
+      box.removeAttribute("data-zoomed");
+      box.showModal();
+    });
+  });
+
+  boxImg?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    box?.toggleAttribute("data-zoomed");
+  });
+
+  box?.addEventListener("click", () => box.close());
+</script>
 
 <style>
   .pp {
