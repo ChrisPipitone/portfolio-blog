@@ -1,14 +1,13 @@
 export const site = {
   name: "Chris Pipitone",
   handle: "chris.pipitone",
-  tagline: "Software Engineer",
-  bio: "Software Engineer since 2022, writing Python/Django professionally, making the shift towards C++ heavy roles. This portfolio site is under heavy development. expect frequent change till I can narrow down the right style.",
+  tagline: "Jabroni Codes",
+  bio: "Software Engineer since 2022. Python/Django professionally, C++ and C for systems and embedded work.",
   url: "https://chrispipitone.com",
   resume: "/Resume_Backend_6-26-26.pdf",
   // Public contact address. Left blank on purpose — set it and /contact shows it.
   email: "chrispipitone@protonmail.com",
-  subline:
-    "I write here not to teach, but to think out loud and shoot my shit.",
+  subline: "I write here to think out loud about my projects",
   skills: [
     "C++",
     "TypeScript",
