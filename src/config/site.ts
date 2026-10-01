@@ -5,7 +5,6 @@ export const site = {
   bio: "Software Engineer since 2022, writing Python/Django professionally, making the shift towards C++ heavy roles. This portfolio site is under heavy development. expect frequent change till I can narrow down the right style.",
   url: "https://chrispipitone.com",
   resume: "/Resume_Backend_6-26-26.pdf",
-  portrait: "/images/portrait.svg",
   // Public contact address. Left blank on purpose — set it and /contact shows it.
   email: "chrispipitone@protonmail.com",
   subline:
