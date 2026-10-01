@@ -6,6 +6,7 @@ tags: ["C++", "ncurses", "SQLite", "CMake"]
 image: "/images/projects/payrolls/demo.gif"
 status: "hold"
 featured: true
+order: 1
 draft: false
 ---
 

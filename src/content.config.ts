@@ -12,6 +12,7 @@ const projects = defineCollection({
     image: z.string().optional(),
     status: z.enum(["wip", "shipped", "archived", "abandoned", "hold"]).optional(),
     featured: z.boolean().default(false),
+    order: z.number().optional(),
     draft: z.boolean().default(false),
   }),
 });

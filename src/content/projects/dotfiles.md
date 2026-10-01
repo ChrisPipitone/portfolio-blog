@@ -6,6 +6,7 @@ tags: ["NeoVim", "tmux", "ZSH", "Hyprland", "Mac", "WSL"]
 image: "/src/assets/images/projects/dotfiles/vim-screenshot.png"
 status: "wip"
 featured: true
+order: 3
 draft: false
 ---
 
