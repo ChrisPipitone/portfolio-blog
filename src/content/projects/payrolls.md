@@ -1,5 +1,5 @@
 ---
-title: "Payrolls"
+title: "Payrolls-TUI"
 description: "A TUI payroll app in standard C++17, rebuilt from a college group project as a way to shake off rusty C++."
 date: 2026-05-19
 tags: ["C++", "ncurses", "SQLite", "CMake"]
