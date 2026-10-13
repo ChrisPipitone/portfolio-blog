@@ -8,6 +8,9 @@ status: "wip"
 featured: true
 order: 3
 draft: false
+links:
+  - label: "GitHub Repo"
+    url: "https://github.com/ChrisPipitone/dotfiles"
 ---
 
 ## The Why and When

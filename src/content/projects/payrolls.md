@@ -8,6 +8,9 @@ status: "hold"
 featured: true
 order: 1
 draft: false
+links:
+  - label: "GitHub Repo"
+    url: "https://github.com/ChrisPipitone/Payrolls-TUI"
 ---
 
 Originally built for a Software Engineering course at CUNY College of Staten Island. Group project, course deadline, delivered in C++/CLI targeting Windows Forms and Microsoft Access.

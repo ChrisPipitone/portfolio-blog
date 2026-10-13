@@ -8,6 +8,11 @@ status: "abandoned"
 featured: true
 order: 2
 draft: false
+links:
+  - label: "GitHub Repo"
+    url: "https://github.com/ChrisPipitone/pulse-travel"
+  - label: "Demo"
+    url: "https://pulse.chrispipitone.com"
 ---
 
 Group trips fall apart on a question nobody tracks: who should actually do what together? Fourteen people say yes to everything in the group chat, then half of them quietly don't show up to the thing you booked. Everyone has opinions, everyone arrives and leaves on different days, and none of that lives anywhere you can look at.
@@ -54,8 +59,8 @@ The trip in order: each stop, its dates, and what's on the table there with the 
 
 ## Stack
 
-- **Next.js 16 + React 19**: App Router, bleeding-edge
-- **TypeScript**: strict
+- **Next.js 16 + React 19**
+- **TypeScript**
 - **Tailwind CSS v4**: CSS-variable-based theming, no config file
 - **Zustand 5**: client state; chosen for eventual React Native parity
 - **Supabase**: Postgres + Auth (magic link + Google OAuth)
