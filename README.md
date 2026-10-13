@@ -20,26 +20,22 @@ title: "Your Project Title"
 description: "One or two sentences."
 date: 2024-06-01
 tags: ["Go", "Firmware"]
-links: # optional, any number
-  - label: "GitLab"
-    url: "https://gitlab.com/you/repo"
+links: # optional, any number; a "Demo" label sorts first
+  - label: "GitHub Repo"
+    url: "https://github.com/you/repo"
+  - label: "Demo"
+    url: "https://demo.example.com"
 image: "/images/your-project.jpg" # optional, place file in public/images/
 featured: true # shows on homepage
 draft: false
 ---
-
-Your writeup here in Markdown. Code blocks get syntax highlighting automatically.
 ```
+
+There are no per-project pages. The title and thumbnail open the first link; the rest show beneath the tags.
 
 3. `git add . && git commit -m "add: project name" && git push`
 
 The site deploys automatically via GitHub Actions.
-
-## Adding a blog post
-
-Same as above but in `src/content/blog/your-post-slug.md`.
-
-Frontmatter fields: `title`, `description`, `date`, `tags`, `draft`.
 
 ## Changing the theme
 
@@ -64,23 +60,19 @@ src/
 ├── components/
 │   ├── Hero.astro          # Homepage hero section
 │   ├── Nav.astro           # Sticky nav + dark mode toggle
-│   ├── ProjectCard.astro   # Project card (grid + optional image)
+│   ├── ProjectCard.astro   # /projects grid card
+│   ├── ProjectSlab.astro   # Homepage project slab
 │   └── SectionHeader.astro # Navy section band with label
 ├── config/
 │   └── site.ts             # Site-wide metadata
+├── content.config.ts       # Content collection schema
 ├── content/
-│   ├── config.ts           # Content collection schemas
-│   ├── blog/               # Blog posts (.md or .mdx)
-│   └── projects/           # Project writeups (.md or .mdx)
+│   └── projects/           # One .md per project (frontmatter drives the site)
 ├── layouts/
-│   ├── Base.astro          # HTML shell, fonts, nav
-│   └── ProjectLayout.astro # Project detail page layout
+│   └── Base.astro          # HTML shell, fonts, nav
 ├── pages/
 │   ├── index.astro
 │   ├── about.astro
-│   ├── blog/[slug].astro
-│   ├── blog/index.astro
-│   ├── projects/[slug].astro
 │   └── projects/index.astro
 └── styles/
     ├── global.css          # Base resets, prose styles
