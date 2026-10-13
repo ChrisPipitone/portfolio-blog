@@ -12,7 +12,7 @@ links:
   - label: "GitHub Repo"
     url: "https://github.com/ChrisPipitone/pulse-travel"
   - label: "Demo"
-    url: "https://pulse.chrispipitone.com"
+    url: "https://pulse.chrispipitone.com/demo"
 ---
 
 Group trips fall apart on a question nobody tracks: who should actually do what together? Fourteen people say yes to everything in the group chat, then half of them quietly don't show up to the thing you booked. Everyone has opinions, everyone arrives and leaves on different days, and none of that lives anywhere you can look at.
