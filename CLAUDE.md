@@ -81,7 +81,7 @@ Single dark theme. **There is no light mode** — the toggle and light palette w
 
 ## Content Structure (working model)
 
-- `/projects` — one Markdown file per project; metadata (title, tags, github link, date); description + approach in Chris's voice
+- `/projects` — one Markdown file per project; metadata (title, tags, links, date); description + approach in Chris's voice
 - `/blog` — general writing; can cross-link to projects
 - YouTube embeds: inline on project or blog pages where relevant
 - `/about` — who Chris is, how he thinks

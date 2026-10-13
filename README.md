@@ -20,7 +20,9 @@ title: "Your Project Title"
 description: "One or two sentences."
 date: 2024-06-01
 tags: ["Go", "Firmware"]
-github: "https://github.com/you/repo" # optional
+links: # optional, any number
+  - label: "GitLab"
+    url: "https://gitlab.com/you/repo"
 image: "/images/your-project.jpg" # optional, place file in public/images/
 featured: true # shows on homepage
 draft: false
