@@ -24,8 +24,7 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
             title={project.data.title}
             description={project.data.description}
             tags={project.data.tags}
-            href={`/projects/${project.id}`}
-            github={project.data.github}
+            links={project.data.links}
             image={project.data.image}
             status={project.data.status}
           />

@@ -11,36 +11,45 @@ interface Props {
   title: string;
   description: string;
   tags: string[];
-  href: string;
-  github?: string;
+  links?: { label: string; url: string }[];
   image?: string;
   status?: "wip" | "shipped" | "archived" | "abandoned" | "hold";
 }
 
-const { title, description, tags, href, github, image, status } = Astro.props;
+const { title, description, tags, links = [], image, status } = Astro.props;
+
+const primary = links[0]?.url;
+const Media = primary ? "a" : "div";
+const mediaProps = primary
+  ? { href: primary, target: "_blank", rel: "noopener noreferrer", tabindex: "-1", "aria-hidden": "true" }
+  : {};
 
 const asset = image ? assetImages[image]?.default : undefined;
 const publicSrc = !asset && image?.startsWith("/") ? image : undefined;
 ---
 
 <article class="card">
-  <a class="card__media" href={href} tabindex="-1" aria-hidden="true">
+  <Media class="card__media" {...mediaProps}>
     {asset && <Image src={asset} alt="" loading="lazy" />}
     {publicSrc && <img src={publicSrc} alt="" loading="lazy" />}
     {!asset && !publicSrc && <span class="card__ph">No media yet</span>}
     {status && <span class={`badge badge--${status} card__badge`}>{status}</span>}
-  </a>
+  </Media>
 
   <div class="card__body">
-    <h3 class="card__title"><a href={href}>{title}</a></h3>
+    <h3 class="card__title">{primary ? <a href={primary} target="_blank" rel="noopener noreferrer">{title}</a> : title}</h3>
     <p class="card__desc">{description}</p>
 
     <ul class="card__tags">
       {tags.map((tag) => <li>{tag}</li>)}
     </ul>
 
-    {github && (
-      <a class="card__github" href={github} target="_blank" rel="noopener noreferrer">↗ GitHub</a>
+    {links.length > 0 && (
+      <ul class="card__links">
+        {links.map((link) => (
+          <li><a href={link.url} target="_blank" rel="noopener noreferrer">↗ {link.label}</a></li>
+        ))}
+      </ul>
     )}
   </div>
 </article>
@@ -103,7 +112,8 @@ const publicSrc = !asset && image?.startsWith("/") ? image : undefined;
     margin: 0 0 0.4rem;
   }
 
-  .card__title a { color: var(--color-heading); }
+  .card__title { color: var(--color-heading); }
+  .card__title a { color: inherit; }
   .card__title a:hover { color: var(--color-accent); }
 
   .card__desc {
@@ -133,8 +143,13 @@ const publicSrc = !asset && image?.startsWith("/") ? image : undefined;
     border-radius: 4px;
   }
 
-  .card__github {
-    margin-top: 1rem;
+  .card__links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    margin: 1rem 0 0;
+    padding: 0;
     font-family: var(--font-mono);
     font-size: 0.75rem;
   }
